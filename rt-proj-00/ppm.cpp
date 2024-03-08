@@ -5,9 +5,9 @@
 using namespace std;
 
 void headerWriter(ofstream &file, int width, int height) {
-    file << "P3\n";         // P3 indicates plain text format
+    file << "P3\n";
     file << width << " " << height << "\n";
-    file << "255\n";        // Maximum color value
+    file << "255\n"; 
 }
 
 // Function to write pixel values to the PPM file
@@ -28,12 +28,12 @@ int main() {
 
     headerWriter(ppmFile, width, height);
 
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
-            // Gradient based on pixel coordinates
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+
             int red = x * 255 / width;
             int green = y * 255 / height;
-            int blue = 51;  // Constant blue value
+            int blue = 51; 
 
             pixelWriter(ppmFile, red, green, blue);
         }
@@ -41,7 +41,7 @@ int main() {
 
     ppmFile.close();
 
-    cout << "PPM image generated successfully." << endl;
+    cout << "Image generated" << endl;
 
     return 0;
 }
