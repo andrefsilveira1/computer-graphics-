@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <vector>
 #include "include/ppm.hpp"
 
 using namespace std;
@@ -53,15 +54,29 @@ int main() {
     }
 
     headerWriter(ppmFile, width, height);
+    // for (int y = height; y > 0; y--) {
+    //     for (int x = 0; x < width; x++) {
+
+    //         int red = x * 255 / width;
+    //         int green = y * 255 / height;
+    //         int blue = 51; 
+
+    //         pixelWriter(ppmFile, red, green, blue);
+    //     }
+    // }
 
     for (int y = height; y > 0; y--) {
         for (int x = 0; x < width; x++) {
+            double u = static_cast<double>(x) / (width - 1);  // Normalize x to [0, 1]
+            double v = static_cast<double>(y - 1) / (height - 1);  // Normalize y to [0, 1]
 
-            int red = x * 255 / width;
-            int green = y * 255 / height;
-            int blue = 51; 
+            // Perform bilinear interpolation to get the color
+            vector<double> interpolatedColor = interpolateColor(A, B, C, D, u, v);
 
-            pixelWriter(ppmFile, red, green, blue);
+            // Convert the interpolated color to integers and write to the file
+            pixelWriter(ppmFile, static_cast<int>(interpolatedColor[0]),
+                                        static_cast<int>(interpolatedColor[1]),
+                                        static_cast<int>(interpolatedColor[2]));
         }
     }
 
