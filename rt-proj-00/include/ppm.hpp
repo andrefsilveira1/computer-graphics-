@@ -1,12 +1,17 @@
-#ifndef PPM_GEN
-#define PPM_GEN
+#ifndef IMAGE_GEN
+#define IMAGE_GEN
 
 #include <iostream>
 #include <fstream>
 
-using namespace std;
+struct Color {
+    int r;
+    int g;
+    int b;
+};
 
-void headerWriter(ofstream &file, int width, int height);
-void pixelWriter(ofstream &file, int red, int green, int blue);
+void headerWriter(std::ofstream &file, int width, int height);
+void pixelWriter(std::ofstream &file, const Color& color);
+Color interpolateColor(const Color& A, const Color& B, const Color& C, const Color& D, double u, double v);
 
-#endif // PPM_GEN
+#endif // IMAGE_GEN

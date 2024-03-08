@@ -32,7 +32,7 @@ int main() {
 
             int red = x * 255 / width;
             int green = y * 255 / height;
-            int blue = 50; 
+            int blue = 51; 
 
             pixelWriter(ppmFile, red, green, blue);
         }
