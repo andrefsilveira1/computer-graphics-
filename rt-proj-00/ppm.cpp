@@ -15,26 +15,24 @@ void pixelWriter(ofstream &file, int red, int green, int blue) {
     file << red << " " << green << " " << blue << "\n";
 }
 
-vector<double> interpolateColor(const vector<double>& A, const vector<double>& B,
-                                const vector<double>& C, const vector<double>& D, double u, double v) {
+vector<double> interpolateColor(const vector<double>& A, const vector<double>& B,const vector<double>& C, const vector<double>& D, double u, double v) {
     // P(t) = (1 - t)*A + t * B
     
-    vector<double> I_axb = {(1.0 - u) * A[0] + u * B[0],
-                            (1.0 - u) * A[1] + u * B[1],
-                            (1.0 - u) * A[2] + u * B[2]};
+    vector<double> I_axb = {(1 - u) * A[0] + u * B[0],
+                            (1 - u) * A[1] + u * B[1],
+                            (1 - u) * A[2] + u * B[2]};
 
-    vector<double> I_cxd = {(1.0 - u) * C[0] + u * D[0],
-                            (1.0 - u) * C[1] + u * D[1],
-                            (1.0 - u) * C[2] + u * D[2]};
+    vector<double> I_cxd = {(1 - u) * C[0] + u * D[0],
+                            (1 - u) * C[1] + u * D[1],
+                            (1 - u) * C[2] + u * D[2]};
 
-    vector<double> P = {(1.0 - v) * I_axb[0] + v * I_cxd[0],
-                        (1.0 - v) * I_axb[1] + v * I_cxd[1],
-                        (1.0 - v) * I_axb[2] + v * I_cxd[2]};
+    vector<double> P = {(1 - v) * I_axb[0] + v * I_cxd[0],
+                        (1 - v) * I_axb[1] + v * I_cxd[1],
+                        (1 - v) * I_axb[2] + v * I_cxd[2]};
 
-    // Round the values to the nearest integer
-    for (auto& component : P) {
-        component = round(component);
-    }
+    // for (auto& component : P) {
+    //     component = round(component);
+    // }
 
     return P;
 }
