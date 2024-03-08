@@ -16,6 +16,7 @@ void pixelWriter(ofstream &file, int red, int green, int blue) {
 }
 
 Color interpolateColor(const Color& A, const Color& B, const Color& C, const Color& D, double u, double v) {
+    // P(t) = (1 - t)*A + t * b
     // Interpolate between A and B with parameter u to get Xb
     Color Xb = { round((1.0 - u) * A.red + u * B.red),
                  round((1.0 - u) * A.green + u * B.green),
@@ -27,11 +28,11 @@ Color interpolateColor(const Color& A, const Color& B, const Color& C, const Col
                  round((1.0 - u) * C.blue + u * D.blue) };
 
     // Interpolate between Xb and Xt with parameter v to get the final color I
-    Color I = { round((1.0 - v) * Xb.red + v * Xt.red),
+    Color P = { round((1.0 - v) * Xb.red + v * Xt.red),
                 round((1.0 - v) * Xb.green + v * Xt.green),
                 round((1.0 - v) * Xb.blue + v * Xt.blue) };
 
-    return I;
+    return P;
 }
 
 int main() {
