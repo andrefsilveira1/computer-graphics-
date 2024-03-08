@@ -16,7 +16,7 @@ void pixelWriter(ofstream &file, int red, int green, int blue) {
     file << red << " " << green << " " << blue << "\n";
 }
 
-vector<double> interpolateColor(const vector<double>& A, const vector<double>& B,const vector<double>& C, const vector<double>& D, double u, double v) {
+vector<double> interpolate(const vector<double>& A, const vector<double>& B,const vector<double>& C, const vector<double>& D, double u, double v) {
     // P(t) = (1 - t) * A + t * B
     
     vector<double> I_axb = {(1 - u) * A[0] + u * B[0],
@@ -50,6 +50,27 @@ int main() {
     }
 
     headerWriter(ppmFile, width, height);
+    // Generation with bilinear interpolation
+    for (int y = height; y > 0; y--) {
+        for (int x = 0; x < width; x++) {
+            double u = static_cast<double>(x) / (width - 1);
+            double v = static_cast<double>(y - 1) / (height - 1); 
+
+            vector<double> color = interpolate(A, B, C, D, u, v);
+
+            pixelWriter(ppmFile, static_cast<int>(color[0]), static_cast<int>(color[1]), static_cast<int>(color[2]));
+        }
+    }
+
+    ppmFile.close();
+
+    cout << "Image generated" << endl;
+
+    return 0;
+}
+
+
+
     // User this for generate ppm as default part 1
 
     // for (int y = height; y > 0; y--) {
@@ -62,22 +83,3 @@ int main() {
     //         pixelWriter(ppmFile, red, green, blue);
     //     }
     // }
-
-    // Generation with bilinear interpolation
-    for (int y = height; y > 0; y--) {
-        for (int x = 0; x < width; x++) {
-            double u = static_cast<double>(x) / (width - 1);
-            double v = static_cast<double>(y - 1) / (height - 1); 
-
-            vector<double> color = interpolateColor(A, B, C, D, u, v);
-
-            pixelWriter(ppmFile, static_cast<int>(color[0]), static_cast<int>(color[1]), static_cast<int>(color[2]));
-        }
-    }
-
-    ppmFile.close();
-
-    cout << "Image generated" << endl;
-
-    return 0;
-}
