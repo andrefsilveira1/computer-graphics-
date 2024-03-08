@@ -40,6 +40,10 @@ vector<double> interpolateColor(const vector<double>& A, const vector<double>& B
 int main() {
     const int width = 400;
     const int height = 200;
+    vector<double> A = {255.0, 182.0, 193.0};  // Pink 
+    vector<double> B = {128.0, 0.0, 128.0};    // Purple
+    vector<double> C = {165.0, 42.0, 42.0};    // Brown 
+    vector<double> D = {0.0, 0.0, 0.0};        // Black
 
     ofstream ppmFile("image.ppm");
 
