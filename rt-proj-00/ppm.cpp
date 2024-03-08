@@ -15,22 +15,26 @@ void pixelWriter(ofstream &file, int red, int green, int blue) {
     file << red << " " << green << " " << blue << "\n";
 }
 
-Color interpolateColor(const Color& A, const Color& B, const Color& C, const Color& D, double u, double v) {
-    // P(t) = (1 - t)*A + t * b
-    // Interpolate between A and B with parameter u to get Xb
-    Color Xb = { round((1.0 - u) * A.red + u * B.red),
-                 round((1.0 - u) * A.green + u * B.green),
-                 round((1.0 - u) * A.blue + u * B.blue) };
+vector<double> interpolateColor(const vector<double>& A, const vector<double>& B,
+                                const vector<double>& C, const vector<double>& D, double u, double v) {
+    // P(t) = (1 - t)*A + t * B
+    
+    vector<double> I_axb = {(1.0 - u) * A[0] + u * B[0],
+                            (1.0 - u) * A[1] + u * B[1],
+                            (1.0 - u) * A[2] + u * B[2]};
 
-    // Interpolate between C and D with parameter u to get Xt
-    Color Xt = { round((1.0 - u) * C.red + u * D.red),
-                 round((1.0 - u) * C.green + u * D.green),
-                 round((1.0 - u) * C.blue + u * D.blue) };
+    vector<double> I_cxd = {(1.0 - u) * C[0] + u * D[0],
+                            (1.0 - u) * C[1] + u * D[1],
+                            (1.0 - u) * C[2] + u * D[2]};
 
-    // Interpolate between Xb and Xt with parameter v to get the final color I
-    Color P = { round((1.0 - v) * Xb.red + v * Xt.red),
-                round((1.0 - v) * Xb.green + v * Xt.green),
-                round((1.0 - v) * Xb.blue + v * Xt.blue) };
+    vector<double> P = {(1.0 - v) * I_axb[0] + v * I_cxd[0],
+                        (1.0 - v) * I_axb[1] + v * I_cxd[1],
+                        (1.0 - v) * I_axb[2] + v * I_cxd[2]};
+
+    // Round the values to the nearest integer
+    for (auto& component : P) {
+        component = round(component);
+    }
 
     return P;
 }
