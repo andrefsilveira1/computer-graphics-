@@ -8,8 +8,14 @@ using real_type = float;
 
 struct RGBColor {
     float r, g, b;
-    RGBColor operator*(float scalar) const {
-        return {r * scalar, g * scalar, b * scalar};
+    RGBColor operator * (float number) const {
+        return {
+          r * number, g * number, b * number
+        };
+    }
+
+     RGBColor operator+(const RGBColor& color) const {
+        return {r + color.r, g + color.g, b + color.b};
     }
 };
 
