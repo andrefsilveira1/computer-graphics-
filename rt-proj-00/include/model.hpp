@@ -1,9 +1,18 @@
 #ifndef BACKGROUND
 #define BACKGROUND
 
+#include <vector>
+
+using real_type = float;
+
+
 struct RGBColor {
     float r, g, b;
 };
+
+RGBColor operator * (float num) const {
+  return {r * num, g * num, b * num};
+}
 
 class BackgroundColor {
   private:

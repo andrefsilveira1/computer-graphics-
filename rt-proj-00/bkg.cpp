@@ -1,4 +1,5 @@
-#include "model.hpp"
+#include "include/model.hpp"
+using real_type = float;
 
 BackgroundColor::BackgroundColor( const std::vector< RGBColor >& colors ) {
     corners[bl] = colors[bl];
@@ -8,7 +9,7 @@ BackgroundColor::BackgroundColor( const std::vector< RGBColor >& colors ) {
 }
 
 RGBColor BackgroundColor::lerp( const RGBColor &A, const RGBColor &B, float t ) const {
-    return A * (1 - t) + (B * t);
+    return (A * (1 - t) + (B * t));
 }
 
 RGBColor BackgroundColor::sampleUV( real_type u, real_type v ) const {
