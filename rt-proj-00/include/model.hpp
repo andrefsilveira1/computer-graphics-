@@ -8,11 +8,12 @@ using real_type = float;
 
 struct RGBColor {
     float r, g, b;
+    RGBColor operator*(float scalar) const {
+        return {r * scalar, g * scalar, b * scalar};
+    }
 };
 
-RGBColor operator * (float num) const {
-  return {r * num, g * num, b * num};
-}
+
 
 class BackgroundColor {
   private:
