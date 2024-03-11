@@ -17,6 +17,7 @@ void pixelWriter(ofstream &file, int red, int green, int blue) {
     file << red << " " << green << " " << blue << "\n";
 }
 
+// Parte 2
 vector<double> interpolate(const vector<double>& A, const vector<double>& B,const vector<double>& C, const vector<double>& D, double u, double v) {
     // P(t) = (1 - t) * A + t * B
     
@@ -52,7 +53,7 @@ int main() {
     ofstream ppmFile("image.ppm");
 
     if (!ppmFile.is_open()) {
-        cerr << "Error: Unable to open the file." << endl; // If the is no file, it will create it
+        cerr << "Error: Unable to open the file." << endl; 
         return 1;
     }
 
